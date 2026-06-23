@@ -1,0 +1,510 @@
+/* ============================================
+   UTKARSH VERMA — PORTFOLIO
+   style.css
+   Last updated: 2026
+   ============================================ */
+
+/* ---------- RESET & BASE ---------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Design tokens */
+:root {
+  --bg:       #0A0A0A;   /* main background */
+  --bg2:      #111111;   /* card/box background */
+  --ink:      #E8E4D9;   /* primary text */
+  --ink-mid:  #8A8680;   /* secondary text */
+  --ink-dim:  #4A4845;   /* muted labels */
+  --orange:   #FF5A36;   /* accent color */
+  --line:     rgba(232, 228, 217, 0.07); /* subtle dividers */
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Lora', Georgia, serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--orange);
+  color: #0A0A0A;
+}
+
+
+/* ---------- SCROLL PROGRESS BAR ---------- */
+#progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 1.5px;
+  width: 0%;
+  background: var(--orange);
+  z-index: 200;
+  transition: width 0.08s linear;
+}
+
+
+/* ---------- NAV ---------- */
+nav {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 52px;
+  /* Fade nav into page */
+  background: linear-gradient(to bottom, rgba(10,10,10,0.96) 0%, transparent 100%);
+}
+
+.nav-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-name:hover { color: var(--ink); }
+
+/* Live indicator dot */
+.nav-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: blink 2s infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.15; }
+}
+
+
+/* ---------- STORY CONTAINER ---------- */
+.story {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+
+/* ---------- HERO SECTION ---------- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 140px;
+  padding-bottom: 96px;
+}
+
+.hero-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--orange);
+  letter-spacing: 0.14em;
+  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* Animated in via JS class */
+  opacity: 0;
+  animation: slideUp 0.8s ease 0.1s forwards;
+}
+.hero-kicker::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--orange);
+}
+
+.hero-h1 {
+  font-size: clamp(42px, 8vw, 78px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;
+}
+.hero-h1 em {
+  font-style: italic;
+  color: var(--orange);
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: var(--ink-mid);
+  line-height: 1.8;
+  max-width: 480px;
+  border-left: 1px solid var(--line);
+  padding-left: 20px;
+  opacity: 0;
+  animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
+.hero-scroll {
+  margin-top: 52px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-dim);
+  letter-spacing: 0.12em;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  opacity: 0;
+  animation: slideUp 1s ease 0.6s forwards;
+}
+.hero-scroll::after {
+  content: '';
+  width: 48px; height: 1px;
+  background: var(--ink-dim);
+}
+
+/* Shared enter animation */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ---------- CHAPTER SECTIONS ---------- */
+.chapter {
+  padding: 88px 0;
+  border-top: 1px solid var(--line);
+}
+
+/* Chapter number label */
+.ch-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-dim);
+  letter-spacing: 0.16em;
+  margin-bottom: 56px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ch-num::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+
+/* ---------- PROFILE INTRO ROW ---------- */
+.intro-row {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 56px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--line);
+}
+
+.intro-img {
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  overflow: hidden;
+  /* Orange ring on dark bg */
+  outline: 2px solid rgba(255, 90, 54, 0.3);
+  outline-offset: 3px;
+}
+.intro-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+}
+
+.intro-text .name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink);
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+.intro-text p {
+  font-size: 14px;
+  color: var(--ink-mid);
+  line-height: 1.65;
+}
+
+
+/* ---------- BODY PROSE ---------- */
+.prose {
+  font-size: 18px;
+  line-height: 1.9;
+  color: var(--ink);
+}
+.prose p {
+  margin-bottom: 24px;
+}
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { font-weight: 500; }
+
+/* Large opening sentence per chapter */
+.prose .big {
+  font-size: clamp(22px, 4vw, 27px);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  margin-bottom: 32px;
+}
+
+
+/* ---------- PULL QUOTE ---------- */
+.pq {
+  margin: 52px 0;
+  padding: 30px 28px;
+  background: rgba(255, 90, 54, 0.06);
+  border-left: 2px solid var(--orange);
+}
+.pq p {
+  font-size: 20px;
+  line-height: 1.65;
+  font-style: italic;
+  color: var(--ink);
+  margin: 0;
+}
+
+
+/* ---------- MOMENT BOX ---------- */
+.moment {
+  margin: 44px 0;
+  padding: 24px 26px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+/* Left accent bar */
+.moment::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--orange), transparent);
+}
+.moment-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--orange);
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+  display: block;
+}
+.moment p {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--ink-mid);
+  margin: 0;
+}
+.moment p strong { color: var(--ink); }
+
+
+/* ---------- COLLAR IMAGE ---------- */
+.collar-section {
+  margin: 56px -28px;
+  position: relative;
+}
+.collar-section img {
+  width: 100%;
+  display: block;
+}
+.collar-caption {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-dim);
+  letter-spacing: 0.1em;
+  padding: 16px 28px 0;
+}
+
+/* Text break line between sections */
+.break-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 48px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-dim);
+  letter-spacing: 0.12em;
+}
+.break-line::before, .break-line::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+
+/* ---------- INFO GRIDS ---------- */
+/* Company info (3 col) */
+.aside {
+  margin: 40px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.aside-item {
+  background: var(--bg);
+  padding: 20px 18px;
+}
+
+/* Tech stack (2 col) */
+.stack {
+  margin: 40px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.stack-item {
+  background: var(--bg);
+  padding: 18px 18px;
+}
+
+/* Shared label/value styles */
+.aside-item .lbl,
+.stack-item .lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-dim);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+.aside-item .val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--ink);
+}
+.stack-item .val {
+  font-size: 15px;
+  color: var(--ink);
+  font-family: 'Lora', serif;
+}
+
+
+/* ---------- SECTION DIVIDER ---------- */
+.div {
+  text-align: center;
+  padding: 24px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-dim);
+  letter-spacing: 0.2em;
+}
+
+
+/* ---------- CONTACT SECTION ---------- */
+.final {
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 88px 0;
+  border-top: 1px solid var(--line);
+}
+
+.final-h {
+  font-size: clamp(32px, 5.5vw, 50px);
+  line-height: 1.15;
+  margin-bottom: 56px;
+  font-weight: 400;
+}
+.final-h em {
+  font-style: italic;
+  color: var(--orange);
+}
+
+.clist { margin-bottom: 44px; }
+
+.ci {
+  display: flex;
+  gap: 20px;
+  align-items: baseline;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+  transition: padding-left 0.25s, border-color 0.25s;
+}
+.ci:hover {
+  padding-left: 8px;
+  border-color: rgba(255, 90, 54, 0.3);
+}
+.ci .cl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-dim);
+  letter-spacing: 0.08em;
+  min-width: 72px;
+}
+.ci .cv { font-size: 16px; }
+
+.final-note {
+  font-size: 13.5px;
+  color: var(--ink-dim);
+  line-height: 1.8;
+  font-style: italic;
+  max-width: 420px;
+}
+
+
+/* ---------- FOOTER ---------- */
+footer {
+  padding: 24px 0 48px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-dim);
+  letter-spacing: 0.06em;
+  border-top: 1px solid var(--line);
+}
+
+
+/* ---------- SCROLL REVEAL UTILITY ---------- */
+/* Elements start hidden, JS adds .on when in viewport */
+.rv {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.rv.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Stagger delays for grouped elements */
+.d1 { transition-delay: 0.08s; }
+.d2 { transition-delay: 0.16s; }
+.d3 { transition-delay: 0.24s; }
+.d4 { transition-delay: 0.32s; }
+
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 680px) {
+  nav { padding: 18px 20px; }
+  .story { padding: 0 20px; }
+  .prose { font-size: 17px; }
+  .prose .big { font-size: 21px; }
+  .pq p { font-size: 18px; }
+  .collar-section { margin: 48px -20px; }
+  .aside { grid-template-columns: repeat(2, 1fr); }
+  footer { flex-direction: column; gap: 6px; }
+}
